@@ -284,10 +284,10 @@
       "style": {"type": "rect","ratio": 1.6}
     },
     {
-	    "key":"麻豆传媒",
-	    "name":"麻豆传媒",
+	    "key":"51吃瓜/嗷",
+	    "name":"吃瓜",
 		"type":3,
-		"api":"https://raw.githubusercontent.com/teddy780102/ok/refs/heads/main/麻豆传媒.py",
+		"api":"https://raw.githubusercontent.com/teddy780102/ok/refs/heads/main/吃瓜.py",
 		"searchable":1,
 		"quickSearch":0,
 		"filterable":0,
