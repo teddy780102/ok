@@ -13,7 +13,7 @@ async def scrape_missav():
         print("正在访问 MissAV...")
         try:
             # 访问首页或特定分类页
-            await page.goto("https://missav.ws/dm194/cn", wait_until="domcontentloaded", timeout=60000)
+            await page.goto("https://missav.com/new", wait_until="domcontentloaded", timeout=60000)
             
             # 等待视频卡片元素加载
             await page.wait_for_selector(".thumbnail", timeout=10000)
