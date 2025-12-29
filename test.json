@@ -304,6 +304,17 @@
 		"changeable":0,
 		"ext":{"http":"","https":""}
     },    
+	  {
+	    "key":"miss",
+	    "name":"miss",
+		"type":3,
+		"api":"https://raw.githubusercontent.com/teddy780102/ok/refs/heads/main/miss.py",
+		"searchable":1,
+		"quickSearch":0,
+		"filterable":0,
+		"changeable":0,
+		"ext":{"http":"","https":""}
+    },    
 	{
 		"key":"Pornhub/嗷",
 		"name":"Pornhub.py",
