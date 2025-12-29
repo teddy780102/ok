@@ -285,9 +285,9 @@
     },
     {
 	    "key":"51吃瓜/嗷",
-	    "name":"吃瓜",
+	    "name":"吃",
 		"type":3,
-		"api":"https://raw.githubusercontent.com/teddy780102/ok/refs/heads/main/吃瓜.py",
+		"api":"https://raw.githubusercontent.com/teddy780102/ok/refs/heads/main/麻豆传媒.py",
 		"searchable":1,
 		"quickSearch":0,
 		"filterable":0,
