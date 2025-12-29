@@ -295,7 +295,7 @@
     },    
 	  {
 	    "key":"javdb",
-	    "name":"吃瓜",
+	    "name":"javdb",
 		"type":3,
 		"api":"https://raw.githubusercontent.com/teddy780102/ok/refs/heads/main/javdb.py",
 		"searchable":1,
