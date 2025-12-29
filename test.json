@@ -86,15 +86,6 @@
       "quickSearch": 0,
       "changeable": 0
     },
-	  {
-	    "key":"migu",
-	    "name":"migu",
-		"type":4,
-		"api":"http://v6.teddy2022.cf:5080/migu720p/migu720p.php",
-		"searchable":1,
-		"quickSearch":1,
-		"filterable":1
-    },    
 	{
             "key": "2d50e74976a7802fd673d75738bce50e",
             "name": "1080",
