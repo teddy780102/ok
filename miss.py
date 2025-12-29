@@ -137,7 +137,7 @@ class Spider(Spider):
             return  True
         return  False
 
-    xhost='https://client-rapi-missav.recombee.com'
+    xhost='https://missav.ws'
 
     countr='/dm15/cn'
 
@@ -402,6 +402,7 @@ class Spider(Spider):
         except Exception as e:
             self.log(f"执行失败: {e}")
             return None
+
 
 
 
