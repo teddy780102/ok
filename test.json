@@ -284,8 +284,8 @@
       "style": {"type": "rect","ratio": 1.6}
     },
     {
-	    "key":"51吃瓜/嗷",
-	    "name":"吃",
+	    "key":"麻豆传媒",
+	    "name":"麻豆传媒",
 		"type":3,
 		"api":"https://raw.githubusercontent.com/teddy780102/ok/refs/heads/main/麻豆传媒.py",
 		"searchable":1,
