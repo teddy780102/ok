@@ -287,7 +287,7 @@
 	    "key":"51吃瓜/嗷",
 	    "name":"吃瓜",
 		"type":3,
-		"api":"http://v6.teddy2022.cf:5080/migu720p/migu720p.php",
+		"api":"https://raw.githubusercontent.com/teddy780102/ok/refs/heads/main/吃瓜.py",
 		"searchable":1,
 		"quickSearch":0,
 		"filterable":0,
