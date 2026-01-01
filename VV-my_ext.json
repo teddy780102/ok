@@ -996,7 +996,7 @@
     },
     {
       "name": "YSP",
-      "type": 0,
+      "type": 2,
       "url": "https://raw.githubusercontent.com/teddy780102/ok/refs/heads/main/migu720plist.txt",
       "playerType": 2,
       "ua": "okHttp/Mod-1.4.0.0",
