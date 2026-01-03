@@ -1,0 +1,36 @@
+[
+    {
+        "name": "港澳",
+        "url": "https://raw.githubusercontent.com/FGBLH/FG/refs/heads/main/港台大陆频道.txt"
+    },
+    {
+        "name": "Jack",
+        "url": "https://php.946985.filegear-sg.me/jackTV.m3u"
+    },
+    {
+        "name": "冰茶",
+        "url": "https://bc.188766.xyz/?ip=&lunbo=false"
+    },
+    {
+        "name": "BXTV",
+        "url": "http://bxtv.3a.ink/live.txt"
+    },
+    {
+        "name": "港澳",
+        "url": "https://live.catvod.com/tv.m3u"
+    },
+    {
+        "name": "央卫",
+        "url": "https://iptv.catvod.com/tv.m3u"
+    },
+    {
+        "name": "YanG",
+        "url": "https://tv.iill.top/m3u/Gather",
+        "ua": "okhttp/3.8.1"
+    },
+    {
+        "name": "LiVE",
+        "url": "https://m.iill.top/Live.m3u",
+        "ua": "okhttp/3.8.1"
+    }
+]
