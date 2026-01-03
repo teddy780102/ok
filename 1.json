@@ -4,24 +4,12 @@
         "url": "http://v6.teddy2022.cf:5678/tvbox/iptv.m3u"
     },
     {
-        "name": "Music",
-        "url": "https://raw.githubusercontent.com/teddy780102/ok/refs/heads/main/电台.txt"
-    },
-    {
-        "name": "𝟭𝟴",
-        "url": "https://gitee.com/sji820/des/raw/master/0.jpg"
-    },
-    {
         "name": "港台",
         "url": "https://live.catvod.com/tv.m3u"
     },
     {
         "name": "咪咕",
-        "url": "https://iptv.catvod.com/tv.m3u"
-    },
-    {
-        "name": "咪咕₁",
-        "url": "https://github.com/develop202/migu_video/raw/main/interface.txt"
+        "url": "http://v6.teddy2022.cf:5080/migu720p/migu720plist.txt"
     },
     {
         "name": "港澳",
