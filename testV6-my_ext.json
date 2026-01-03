@@ -85,6 +85,7 @@
       "quickSearch": 0,
       "changeable": 0
     },
+	  {"key":"直播转点播","name":"直播转点播","type":3,"api":"https://raw.githubusercontent.com/teddy780102/ok/refs/heads/main/1.js","searchable":0,"quickSearch":1,"filterable":0,"ext":"https://raw.githubusercontent.com/teddy780102/ok/refs/heads/main/1.json"},
 	{
             "key": "2d50e74976a7802fd673d75738bce50e",
             "name": "1080",
