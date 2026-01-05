@@ -1,4 +1,4 @@
-import { Crypto, load, _ } from './lib/cat.js';
+import { Crypto, load, _ } from 'https://ghfast.top/https://raw.githubusercontent.com/teddy780102/ok/refs/heads/main/cat.js';
 
 let key = 'misaav';
 let url = 'https://missav789.com';
