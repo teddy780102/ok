@@ -1,7 +1,7 @@
 import { Crypto, load, _ } from 'https://ghfast.top/https://raw.githubusercontent.com/teddy780102/ok/refs/heads/main/cat.js';
 
 let key = 'misaav';
-let url = 'https://missav789.com';
+let url = 'https://missav.ws/dm223/en';
 let siteKey = '';
 let siteType = 0;
 
