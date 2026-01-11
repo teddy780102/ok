@@ -1,7 +1,3 @@
-#EXTM3U
-#EXTINF:-1,tvg-id="松视2" tvg-name="松视2" tvg-logo="https://epg.112114.xyz/logo/松视2.png" group-title="其他",松视2
-http://15.204.105.50:25461/live/G2s9zK2n9m/xDtwVfWM8T/90.ts
-#EXTINF:-1,tvg-id="松视3" tvg-name="松视3" tvg-logo="https://epg.112114.xyz/logo/松视3.png" group-title="其他",松视3
-http://15.204.105.50:25461/live/G2s9zK2n9m/xDtwVfWM8T/89.ts
-#EXTINF:-1,tvg-id="松视1" tvg-name="松视1" tvg-logo="https://epg.112114.xyz/logo/松视1.png" group-title="其他",松视1
-http://15.204.105.50:25461/live/G2s9zK2n9m/xDtwVfWM8T/88.ts
+松视2,http://15.204.105.50:25461/live/G2s9zK2n9m/xDtwVfWM8T/90.ts
+松视3,http://15.204.105.50:25461/live/G2s9zK2n9m/xDtwVfWM8T/89.ts
+松视1,http://15.204.105.50:25461/live/G2s9zK2n9m/xDtwVfWM8T/88.ts
