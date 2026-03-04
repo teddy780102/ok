@@ -1,0 +1,42 @@
+{
+  "spider": "https://fastly.jsdelivr.net/gh/Hiram-Wong/ZyPlayer-Resources@main/Home/lib/drpy2.min.js",
+  "sites": [
+    {
+      "key": "MissAV",
+      "name": "🔞 MissAV (中文)",
+      "type": 3,
+      "api": "https://fastly.jsdelivr.net/gh/Hiram-Wong/ZyPlayer-Resources@main/Home/lib/drpy2.min.js",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": {
+        "title": "MissAV",
+        "host": "https://missav.ws",
+        "url": "/cn/recent-updates?page=fypage",
+        "searchUrl": "/cn/search/**?page=fypage",
+        "headers": {
+          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
+        },
+        "class_name": "最近更新&中文字幕&最热&无码流出",
+        "class_url": "recent-updates&chinese-subtitle&most-viewed&uncensored-leak",
+        "play_parse": true,
+        "lazy": "js:var html=request(input);var m3u8=pdfh(html,'script:contains(m3u8)@text').match(/https.*?m3u8/)[0];input={url:m3u8,header:rule.headers}",
+        "一级": ".grid > div;img@alt;img@data-src;;a@href",
+        "二级": {
+          "title": "h1.text-base@text",
+          "img": "video@poster",
+          "desc": ".mt-1:eq(0)@text",
+          "content": ".mt-1:eq(1)@text",
+          "tabs": "js:TABS=['播放列表']",
+          "lists": "js:LISTS=[[input]]"
+        }
+      }
+    }
+  ],
+  "rules": [
+    {
+      "name": "proxy",
+      "hosts": ["raw.githubusercontent.com", "googlevideo.com", "cdn.discordapp.com"]
+    }
+  ]
+}
