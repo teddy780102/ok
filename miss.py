@@ -1,134 +1,109 @@
 # -*- coding: utf-8 -*-
 import json
 import re
-import cloudscraper  # 必须安装这个库
+import time
+from DrissionPage import ChromiumPage, ChromiumOptions
 from pyquery import PyQuery as pq
 from base.spider import Spider
 
 class Spider(Spider):
     def init(self, extend="{}"):
         config = json.loads(extend)
-        # 实时检查域名是否变动
         self.host = config.get('site', 'https://missav.ws').rstrip('/')
         self.base_path = "/dm194/cn"
         
-        # 创建一个带有浏览器指纹的爬取器
-        self.scraper = cloudscraper.create_scraper(
-            browser={
-                'browser': 'chrome',
-                'platform': 'windows',
-                'desktop': True
-            }
-        )
-        
-        self.headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
-            'Referer': self.host,
-            'Accept-Language': 'zh-CN,zh;q=0.9',
-        }
+        # 配置无头浏览器模式（不弹出窗口）
+        self.co = ChromiumOptions()
+        self.co.set_argument('--no-sandbox')
+        self.co.set_argument('--headless')  # 如果调试可以注释掉这行看浏览器操作
+        self.co.set_user_agent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36')
+
+    def get_html_with_browser(self, url):
+        """核心：使用浏览器内核过盾并获取 HTML"""
+        page = ChromiumPage(self.co)
+        try:
+            page.get(url)
+            # 等待关键元素加载，这会自动处理 5 秒盾
+            if page.wait.ele_displayed('.thumbnail', timeout=10):
+                return page.html
+            return page.html
+        finally:
+            page.quit()
 
     def homeContent(self, filter):
-        # 强制访问一次首页，建立会话
         url = f"{self.host}{self.base_path}/new"
-        try:
-            res = self.scraper.get(url, headers=self.headers, timeout=20)
-            if res.status_code != 200:
-                return {"class": [], "list": [], "msg": f"错误代码: {res.status_code}"}
-            
-            doc = pq(res.content)
-            
-            classes = [
-                {"type_id": "new", "type_name": "最近更新"},
-                {"type_id": "release", "type_name": "最新发行"},
-                {"type_id": "chinese-subtitle", "type_name": "中文字幕"},
-                {"type_id": "uncensored-leak", "type_name": "无码流出"},
-                {"type_id": "genres/uncensored", "type_name": "无码影片"},
-                {"type_id": "genres/censored", "type_name": "有码影片"}
-            ]
-            
-            return {
-                'class': classes,
-                'list': self.parse_list(doc),
-                'filters': {}
-            }
-        except Exception as e:
-            return {"class": [], "list": [], "msg": str(e)}
+        html = self.get_html_with_browser(url)
+        doc = pq(html)
+        
+        classes = [
+            {"type_id": "new", "type_name": "最近更新"},
+            {"type_id": "chinese-subtitle", "type_name": "中文字幕"},
+            {"type_id": "uncensored-leak", "type_name": "无码流出"},
+            {"type_id": "genres/uncensored", "type_name": "无码影片"}
+        ]
+        
+        return {
+            'class': classes,
+            'list': self.parse_list(doc),
+            'filters': {}
+        }
 
     def categoryContent(self, tid, pg, filter, extend):
         url = f"{self.host}{self.base_path}/{tid}?page={pg}"
-        res = self.scraper.get(url, headers=self.headers, timeout=20)
-        doc = pq(res.content)
+        html = self.get_html_with_browser(url)
+        doc = pq(html)
         return {
             'list': self.parse_list(doc),
-            'page': int(pg),
-            'pagecount': 999,
-            'limit': 12
+            'page': int(pg)
         }
 
     def parse_list(self, doc):
         videos = []
-        # 针对该站点的 HTML 结构精准定位
         items = doc('.thumbnail').items()
         for item in items:
             img = item('img').attr('data-src') or item('img').attr('src') or ""
-            if img.startswith('//'): img = "https:" + img
-            
             a_tag = item('a').last()
             href = a_tag.attr('href') or ""
-            if not href: continue
-            
             vod_id = href.rstrip('/').split('/')[-1]
-            title = a_tag.attr('title') or item('h2').text() or "未知影片"
-            remarks = item('.duration').text() or item('.absolute.bottom-1').text() or ""
             
-            videos.append({
-                "vod_id": vod_id,
-                "vod_name": title.strip(),
-                "vod_pic": img,
-                "vod_remarks": remarks.strip(),
-            })
+            if vod_id:
+                videos.append({
+                    "vod_id": vod_id,
+                    "vod_name": (a_tag.attr('title') or item('h2').text() or "影片").strip(),
+                    "vod_pic": img if img.startswith('http') else "https:" + img if img.startswith('//') else "",
+                    "vod_remarks": item('.duration').text() or ""
+                })
         return videos
 
     def detailContent(self, ids):
         mid = ids[0]
         url = f"{self.host}/{mid}"
-        res = self.scraper.get(url, headers=self.headers, timeout=20)
-        html = res.text
+        # 详情页也需要过盾
+        page = ChromiumPage(self.co)
+        page.get(url)
+        html = page.html
         doc = pq(html)
         
         # 提取 m3u8
-        play_url = ""
-        m1 = re.search(r"source\s*=\s*'(https?://[^']+?\.m3u8[^']*)'", html)
-        m2 = re.search(r'https?%[A-F0-9]{2}[^"\']+\.m3u8[^"\']*', html)
+        m3u8 = ""
+        match = re.search(r"source\s*=\s*'(https?://[^']+?\.m3u8[^']*)'", html)
+        if match:
+            m3u8 = match.group(1)
         
-        if m1:
-            play_url = m1.group(1)
-        elif m2:
-            from urllib.parse import unquote
-            play_url = unquote(m2.group(0))
-        else:
-            play_url = f"嗅探${url}"
+        page.quit()
 
         vod = {
             "vod_id": mid,
             "vod_name": doc('h1').text().strip(),
             "vod_pic": doc('video').attr('poster') or "",
-            "vod_type": "影片详情",
-            "vod_actor": doc('a[href*="actors"]').text(),
             "vod_play_from": "MissAV",
-            "vod_play_url": f"播放列表${play_url}",
-            "vod_content": doc('.text-secondary.break-all').text().strip()
+            "vod_play_url": f"播放链接${m3u8 if m3u8 else '嗅探$' + url}"
         }
         return {"list": [vod]}
 
-    def searchContent(self, key, quick, pg="1"):
-        url = f"{self.host}{self.base_path}/search/{key}?page={pg}"
-        res = self.scraper.get(url, headers=self.headers, timeout=20)
-        return {"list": self.parse_list(pq(res.content))}
-
     def playerContent(self, flag, id, vipFlags):
-        actual_url = id.split('$')[-1]
         return {
-            "parse": 0 if "m3u8" in actual_url else 1,
-            "url": actual_url,
-            "header": json.dumps(self.headers)
+            "parse": 0 if "m3u8" in id else 1,
+            "url": id.split('$')[-1],
+            "header": "" # 浏览器模式下 header 往往已在 Cookie 中集成
+        }
