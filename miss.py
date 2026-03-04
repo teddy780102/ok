@@ -6,7 +6,7 @@ from base.spider import Spider
 class Spider(Spider):
     def init(self, extend="{}"):
         config = json.loads(extend)
-        self.host = config.get('site', 'https://missav.com')
+        self.host = config.get('site', 'https://missav.ws/dm194/cn')
         self.headers = {
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
             'Referer': self.host,
@@ -101,3 +101,4 @@ class Spider(Spider):
             "url": id,
             "header": self.headers
         }
+
